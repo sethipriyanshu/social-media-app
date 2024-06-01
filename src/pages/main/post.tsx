@@ -58,7 +58,7 @@ export const Post = (props: Props) =>{
     useEffect(()=>{
         getLikes();
     },[])
-    return <div>
+    return <div className="temp-div"><div className="post-card">
         <div className="title">
             <h1>
                 {post.title}
@@ -75,5 +75,6 @@ export const Post = (props: Props) =>{
             <button onClick={hasUserLiked? removeLike :addLike }>{hasUserLiked? <> &#128078; </> : <>&#128077;</>}</button>
             {likes && <p>Likes: {likes?.length}</p>}    
             </div>
+    </div>
     </div>
 }   
