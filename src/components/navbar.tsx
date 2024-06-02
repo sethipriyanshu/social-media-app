@@ -15,6 +15,7 @@ export const Navbar = () =>{
         {!user ? <Link to="/login">Login</Link>: 
         <Link to="/createpost">Create Post</Link>
 }
+        {user && <Link to="/my-post">My Posts</Link>}
         </div>
         <div className="user">
        {user && ( 
