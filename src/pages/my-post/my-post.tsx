@@ -58,23 +58,26 @@ export const MyPost = (props: Props) =>{
     useEffect(()=>{
         getLikes();
     },[])
-    return <div className="temp-div"><div className="post-card">
+
+
+     return <div className="temp-div"><div className="post-card">
         <div className="title">
             <h1>
-                {post.title}
+                {auth.currentUser?.displayName == post.username && post.title}
             </h1>
         </div>
         <div className="body">
             <p>
-                {post.description}
+                {auth.currentUser?.displayName == post.username && post.description}
             </p>
         </div>
         <div className="footer"><p>
-            @{post.username}
+            <button>Delete Post</button>
             </p>
-            <button onClick={hasUserLiked? removeLike :addLike }>{hasUserLiked? <> &#128078; </> : <>&#128077;</>}</button>
-            {likes && <p>Likes: {likes?.length}</p>}    
-            </div>
+        </div>
+
     </div>
     </div>
-}   
+    
+    
+}  

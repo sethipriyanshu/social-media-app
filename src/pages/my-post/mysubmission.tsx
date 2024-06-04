@@ -1,8 +1,9 @@
 import {getDocs, collection} from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { StringLiteral } from "typescript";
 import { MyPost } from "./my-post";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export interface Post {
     id: string;
@@ -15,6 +16,7 @@ export interface Post {
 
 export const MySubmission = () =>{
     const [postsList, setPostsList] = useState<Post[] | null>(null);
+    const [user] = useAuthState(auth);
     const postsRef = collection(db,"posts");
     const getPosts = async () =>{
         const data = await getDocs(postsRef);
@@ -26,6 +28,6 @@ export const MySubmission = () =>{
     },[])
     
     return <div>
-        {postsList?.map((post) =>(<MyPost post = {post} />))}
+         {postsList?.map((post) =>(<MyPost post = {post} />))}
     </div>
 }
