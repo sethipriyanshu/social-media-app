@@ -5,7 +5,7 @@ import { Main } from './pages/main/main';
 import { Login } from './pages/login';
 import { Navbar } from './components/navbar';
 import { CreatePost } from './pages/create-post/create-post';
-import { MyPost } from './pages/my-post/my-post';
+import { MySubmission } from './pages/my-post/mysubmission';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path = "/" element={<Main/>}/>
           <Route path = "/login" element={<Login/>}/>
           <Route path = "/createpost" element={<CreatePost/>}/>
-          <Route path = "/my-post" element ={<MyPost/>}/>
+          <Route path = "/my-post" element ={<MySubmission/>}/>
 
         </Routes>
       </Router>
