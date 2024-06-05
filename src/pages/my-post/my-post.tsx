@@ -22,6 +22,7 @@ export const MyPost = (props: Props) =>{
     const likesDoc = query(likesRef, where("postId","==",post.id))
 
     const deletePost = async () =>{
+        try{
         const postToDeletequery = query(postsRef, where("title","==",post.title), where("userId","==",user?.uid))
         const postToDeleteData = await getDocs(postToDeletequery);
         const postToDelete = doc(db,"posts",postToDeleteData.docs[0].id);
@@ -31,28 +32,33 @@ export const MyPost = (props: Props) =>{
         const likeToDeleteData = await getDocs(likeToDeletequery);
         const likeToDelete = doc(db,"likes",likeToDeleteData.docs[0].id);
         await deleteDoc(likeToDelete);
+        }
+        catch{
+            console.log("Deletion Error");
+        }
 
     }
 
 
-     return <div className="temp-div"><div className="post-card">
-        <div className="title">
-            <h1>
-                {auth.currentUser?.displayName == post.username ? post.title : null}
-            </h1>
+    return (
+        <div className="temp-div">
+            {auth.currentUser?.displayName === post.username && (
+                <div className="post-card">
+                    <div className="title">
+                        <h1>{post.title}</h1>
+                    </div>
+                    <div className="body">
+                        <p>{post.description}</p>
+                    </div>
+                    <div className="footer">
+                        <p>
+                            <button onClick={deletePost}>Delete Post</button>
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="body">
-            <p>
-                {auth.currentUser?.displayName == post.username ? post.description: null}
-            </p>
-        </div>
-         <div className="footer"><p>
-            <button onClick={deletePost}>Delete Post</button>
-            </p>
-        </div> 
-
-    </div>
-    </div>
+    );
     
     
 }  
